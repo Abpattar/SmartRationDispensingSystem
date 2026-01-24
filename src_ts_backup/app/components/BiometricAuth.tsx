@@ -87,15 +87,15 @@ export function BiometricAuth() {
               {/* Scanner Display */}
               <div className="relative">
                 <div className={`border-4 rounded-2xl p-8 flex items-center justify-center aspect-square transition-all ${
-                  authStep === "idle" ? "border-gray-300 bg-gray-50" :
-                  authStep === "scanning" ? "border-blue-500 bg-blue-50 animate-pulse" :
-                  authStep === "success" ? "border-green-500 bg-green-50" :
+                  authStep === "idle" ? "border-gray-300 bg-muted/50" :
+                  authStep === "scanning" ? "border-blue-500 bg-blue-500/10 animate-pulse" :
+                  authStep === "success" ? "border-green-500 bg-green-500/10" :
                   "border-red-500 bg-red-50"
                 }`}>
                   {authStep === "idle" && (
                     <div className="text-center">
                       <Scan className="w-24 h-24 text-gray-400 mx-auto mb-4" />
-                      <p className="text-gray-600 font-medium">Place finger on scanner</p>
+                      <p className="text-muted-foreground font-medium">Place finger on scanner</p>
                       <p className="text-sm text-gray-500 mt-2">System ready to authenticate</p>
                     </div>
                   )}
@@ -150,9 +150,9 @@ export function BiometricAuth() {
               </div>
 
               {/* Scanner Status */}
-              <div className="flex items-center justify-between p-3 bg-green-50 rounded-lg border border-green-200">
+              <div className="flex items-center justify-between p-3 bg-green-500/10 rounded-lg border border-green-200">
                 <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                  <div className="w-2 h-2 bg-green-500/100 rounded-full animate-pulse"></div>
                   <span className="text-sm font-medium text-green-700">Scanner Status: Active</span>
                 </div>
                 <Badge className="bg-green-100 text-green-700">
@@ -174,7 +174,7 @@ export function BiometricAuth() {
           <CardContent>
             {authStep === "success" ? (
               <div className="space-y-4">
-                <div className="flex items-start gap-4 p-4 bg-green-50 rounded-lg border border-green-200">
+                <div className="flex items-start gap-4 p-4 bg-green-500/10 rounded-lg border border-green-200">
                   <img 
                     src={beneficiaryDetails.photo} 
                     alt="Beneficiary" 
@@ -182,9 +182,9 @@ export function BiometricAuth() {
                   />
                   <div className="flex-1">
                     <h3 className="font-semibold text-lg">{beneficiaryDetails.name}</h3>
-                    <p className="text-sm text-gray-600">ID: {beneficiaryDetails.id}</p>
-                    <p className="text-sm text-gray-600">Card: {beneficiaryDetails.rationCard}</p>
-                    <Badge className="bg-green-500 hover:bg-green-500 text-white mt-2">
+                    <p className="text-sm text-muted-foreground">ID: {beneficiaryDetails.id}</p>
+                    <p className="text-sm text-muted-foreground">Card: {beneficiaryDetails.rationCard}</p>
+                    <Badge className="bg-green-500/100 hover:bg-green-500/100 text-white mt-2">
                       <CheckCircle2 className="w-3 h-3 mr-1" />
                       Verified
                     </Badge>
@@ -193,11 +193,11 @@ export function BiometricAuth() {
 
                 <div className="space-y-3">
                   <div className="flex items-center justify-between py-2 border-b">
-                    <span className="text-sm text-gray-600">Family Members</span>
+                    <span className="text-sm text-muted-foreground">Family Members</span>
                     <span className="font-medium">{beneficiaryDetails.familyMembers}</span>
                   </div>
                   <div className="flex items-center justify-between py-2 border-b">
-                    <span className="text-sm text-gray-600">Last Visit</span>
+                    <span className="text-sm text-muted-foreground">Last Visit</span>
                     <span className="font-medium">{beneficiaryDetails.lastVisit}</span>
                   </div>
                 </div>
@@ -206,8 +206,8 @@ export function BiometricAuth() {
                   <h4 className="font-medium mb-3">Remaining Monthly Quota</h4>
                   <div className="grid grid-cols-2 gap-3">
                     {Object.entries(beneficiaryDetails.remainingQuota).map(([item, quantity]) => (
-                      <div key={item} className="p-3 bg-blue-50 rounded-lg border border-blue-200">
-                        <p className="text-xs text-gray-600 capitalize">{item}</p>
+                      <div key={item} className="p-3 bg-blue-500/10 rounded-lg border border-blue-200">
+                        <p className="text-xs text-muted-foreground capitalize">{item}</p>
                         <p className="font-semibold text-blue-700">{quantity}</p>
                       </div>
                     ))}
@@ -242,14 +242,14 @@ export function BiometricAuth() {
         <CardContent>
           <div className="space-y-3">
             {recentVerifications.map((verification, index) => (
-              <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+              <div key={index} className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
                 <div className="flex items-center gap-3">
                   <div className={`w-2 h-2 rounded-full ${
-                    verification.status === "verified" ? "bg-green-500" : "bg-red-500"
+                    verification.status === "verified" ? "bg-green-500/100" : "bg-red-500"
                   }`}></div>
                   <div>
                     <p className="font-medium text-sm">{verification.beneficiary}</p>
-                    <p className="text-xs text-gray-600">{verification.id}</p>
+                    <p className="text-xs text-muted-foreground">{verification.id}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
@@ -270,7 +270,7 @@ export function BiometricAuth() {
       </Card>
 
       {/* Info Banner */}
-      <Card className="bg-blue-50 border-blue-200">
+      <Card className="bg-blue-500/10 border-blue-200">
         <CardContent className="pt-6">
           <div className="flex items-start gap-3">
             <AlertCircle className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />

@@ -122,7 +122,7 @@ export function TransactionsReports() {
         <Card>
           <CardContent className="pt-6">
             <div className="space-y-1">
-              <p className="text-sm text-gray-600">Today's Transactions</p>
+              <p className="text-sm text-muted-foreground">Today's Transactions</p>
               <p className="text-2xl font-semibold">1,234</p>
               <p className="text-xs text-green-600">+8.3% from yesterday</p>
             </div>
@@ -132,7 +132,7 @@ export function TransactionsReports() {
         <Card>
           <CardContent className="pt-6">
             <div className="space-y-1">
-              <p className="text-sm text-gray-600">Success Rate</p>
+              <p className="text-sm text-muted-foreground">Success Rate</p>
               <p className="text-2xl font-semibold">98.7%</p>
               <p className="text-xs text-green-600">+0.2% from avg</p>
             </div>
@@ -142,9 +142,9 @@ export function TransactionsReports() {
         <Card>
           <CardContent className="pt-6">
             <div className="space-y-1">
-              <p className="text-sm text-gray-600">Total Dispensed</p>
+              <p className="text-sm text-muted-foreground">Total Dispensed</p>
               <p className="text-2xl font-semibold">8.2T</p>
-              <p className="text-xs text-gray-600">Today</p>
+              <p className="text-xs text-muted-foreground">Today</p>
             </div>
           </CardContent>
         </Card>
@@ -152,7 +152,7 @@ export function TransactionsReports() {
         <Card>
           <CardContent className="pt-6">
             <div className="space-y-1">
-              <p className="text-sm text-gray-600">Avg Transaction Time</p>
+              <p className="text-sm text-muted-foreground">Avg Transaction Time</p>
               <p className="text-2xl font-semibold">2.3min</p>
               <p className="text-xs text-green-600">-0.4min faster</p>
             </div>
@@ -274,13 +274,13 @@ export function TransactionsReports() {
             {reportCategories.map((report, index) => {
               const Icon = report.icon;
               return (
-                <div key={index} className="flex items-start gap-4 p-4 border rounded-lg hover:bg-gray-50 transition-colors">
-                  <div className="p-2 bg-blue-50 rounded-lg">
+                <div key={index} className="flex items-start gap-4 p-4 border rounded-lg hover:bg-muted/50 transition-colors">
+                  <div className="p-2 bg-blue-500/10 rounded-lg">
                     <Icon className="w-6 h-6 text-blue-600" />
                   </div>
                   <div className="flex-1">
                     <h4 className="font-medium">{report.name}</h4>
-                    <p className="text-sm text-gray-600 mt-1">{report.description}</p>
+                    <p className="text-sm text-muted-foreground mt-1">{report.description}</p>
                     <Button variant="outline" size="sm" className="mt-3">
                       <Download className="w-3 h-3 mr-2" />
                       Generate PDF

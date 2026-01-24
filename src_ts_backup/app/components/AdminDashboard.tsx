@@ -55,14 +55,7 @@ export function AdminDashboard() {
     { time: "22 min ago", action: "Ration dispensed", user: "Center #45", detail: "3kg Sugar, 1L Oil", status: "success", beneficiary: "Meena Kumari" },
   ];
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case "success": return "bg-green-100 text-green-700";
-      case "warning": return "bg-orange-100 text-orange-700";
-      case "info": return "bg-blue-100 text-blue-700";
-      default: return "bg-gray-100 text-gray-700";
-    }
-  };
+
 
   const handleActivityClick = (activity: typeof recentActivity[0]) => {
     if (activity.status === "success" && activity.action === "Biometric verified") {
@@ -97,11 +90,11 @@ export function AdminDashboard() {
                 </div>
                 <div>
                   <div className="font-semibold">Real-time Activity Feed</div>
-                  <div className="text-xs font-normal text-gray-600 mt-0.5">Live system monitoring</div>
+                  <div className="text-xs font-normal text-muted-foreground mt-0.5">Live system monitoring</div>
                 </div>
               </CardTitle>
               <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                <div className="w-2 h-2 bg-green-500/100 rounded-full animate-pulse"></div>
                 <span className="text-xs font-medium text-green-700">Live</span>
               </div>
             </div>
@@ -109,26 +102,24 @@ export function AdminDashboard() {
           <CardContent className="pt-6">
             <div className="space-y-4 max-h-[500px] overflow-y-auto">
               {recentActivity.map((activity, index) => (
-                <div 
-                  key={index} 
-                  className={`flex items-start gap-3 pb-4 border-b last:border-b-0 ${
-                    activity.status === 'success' && activity.action === 'Biometric verified' 
-                      ? 'cursor-pointer hover:bg-blue-50 p-3 rounded-lg -m-3 mb-1' 
+                <div
+                  key={index}
+                  className={`flex items-start gap-3 pb-4 border-b last:border-b-0 ${activity.status === 'success' && activity.action === 'Biometric verified'
+                      ? 'cursor-pointer hover:bg-blue-500/10 p-3 rounded-lg -m-3 mb-1'
                       : ''
-                  }`}
+                    }`}
                   onClick={() => handleActivityClick(activity)}
                 >
-                  <div className={`flex-shrink-0 w-2 h-2 rounded-full mt-2 ${
-                    activity.status === 'success' ? 'bg-green-500' : 
-                    activity.status === 'warning' ? 'bg-orange-500' : 
-                    'bg-blue-500'
-                  }`}></div>
+                  <div className={`flex-shrink-0 w-2 h-2 rounded-full mt-2 ${activity.status === 'success' ? 'bg-green-500/100' :
+                      activity.status === 'warning' ? 'bg-orange-500' :
+                        'bg-blue-500/100'
+                    }`}></div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center justify-between gap-2">
                       <p className="font-medium text-sm">{activity.action}</p>
                       <span className="text-xs text-gray-500 flex-shrink-0">{activity.time}</span>
                     </div>
-                    <p className="text-sm text-gray-600">{activity.user}</p>
+                    <p className="text-sm text-muted-foreground">{activity.user}</p>
                     <p className="text-xs text-gray-500 mt-1">{activity.detail}</p>
                   </div>
                   {activity.status === 'success' && activity.action === 'Biometric verified' && (
@@ -149,13 +140,13 @@ export function AdminDashboard() {
                 <CardContent className="pt-6">
                   <div className="flex items-start justify-between">
                     <div className="space-y-1">
-                      <p className="text-sm text-gray-600">{stat.title}</p>
+                      <p className="text-sm text-muted-foreground">{stat.title}</p>
                       <p className="text-2xl font-semibold">{stat.value}</p>
                       <p className={`text-xs ${stat.change.startsWith('+') ? 'text-green-600' : 'text-red-600'}`}>
                         {stat.change} from last month
                       </p>
                     </div>
-                    <div className={`p-3 rounded-lg bg-gray-50 ${stat.color}`}>
+                    <div className={`p-3 rounded-lg bg-muted/50 ${stat.color}`}>
                       <Icon className="w-6 h-6" />
                     </div>
                   </div>
@@ -263,7 +254,7 @@ export function AdminDashboard() {
         </Card>
 
         {/* System Health */}
-        <Card className="bg-green-50 border-green-200">
+        <Card className="bg-green-500/10 border-green-200">
           <CardContent className="pt-6">
             <div className="flex items-center gap-3">
               <div className="p-2 bg-green-100 rounded-full">
@@ -293,8 +284,8 @@ export function AdminDashboard() {
                     </div>
                     Authenticated
                   </CardTitle>
-                  <Button 
-                    variant="ghost" 
+                  <Button
+                    variant="ghost"
                     size="sm"
                     onClick={() => setAuthenticatedBeneficiary(null)}
                     className="h-6 px-2 text-xs"
@@ -312,22 +303,22 @@ export function AdminDashboard() {
                     </div>
                     <div>
                       <h3 className="font-semibold">{authenticatedBeneficiary.name}</h3>
-                      <p className="text-xs text-gray-600">{authenticatedBeneficiary.id}</p>
+                      <p className="text-xs text-muted-foreground">{authenticatedBeneficiary.id}</p>
                     </div>
                   </div>
 
                   {/* Details */}
                   <div className="space-y-2 text-sm">
                     <div className="flex justify-between py-2 border-b">
-                      <span className="text-gray-600">Ration Card</span>
+                      <span className="text-muted-foreground">Ration Card</span>
                       <span className="font-medium text-xs">{authenticatedBeneficiary.rationCard}</span>
                     </div>
                     <div className="flex justify-between py-2 border-b">
-                      <span className="text-gray-600">Category</span>
+                      <span className="text-muted-foreground">Category</span>
                       <span className="font-medium text-xs">{authenticatedBeneficiary.category}</span>
                     </div>
                     <div className="flex justify-between py-2 border-b">
-                      <span className="text-gray-600">Family Members</span>
+                      <span className="text-muted-foreground">Family Members</span>
                       <span className="font-medium">{authenticatedBeneficiary.familyMembers}</span>
                     </div>
                   </div>
@@ -337,8 +328,8 @@ export function AdminDashboard() {
                     <h4 className="text-sm font-semibold mb-3">Remaining Quota</h4>
                     <div className="grid grid-cols-2 gap-2">
                       {Object.entries(authenticatedBeneficiary.remainingQuota).map(([item, quantity]) => (
-                        <div key={item} className="p-2 bg-blue-50 rounded border border-blue-200">
-                          <p className="text-xs text-gray-600 capitalize">{item}</p>
+                        <div key={item} className="p-2 bg-blue-500/10 rounded border border-blue-200">
+                          <p className="text-xs text-muted-foreground capitalize">{item}</p>
                           <p className="text-sm font-semibold text-blue-700">{quantity}</p>
                         </div>
                       ))}
@@ -354,7 +345,7 @@ export function AdminDashboard() {
             </Card>
 
             {/* Quick Tip */}
-            <Card className="bg-blue-50 border-blue-200">
+            <Card className="bg-blue-500/10 border-blue-200">
               <CardContent className="pt-4">
                 <div className="flex items-start gap-2">
                   <Fingerprint className="w-4 h-4 text-blue-600 flex-shrink-0 mt-0.5" />

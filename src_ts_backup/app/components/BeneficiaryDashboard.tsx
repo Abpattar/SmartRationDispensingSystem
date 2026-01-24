@@ -190,7 +190,7 @@ export function BeneficiaryDashboard() {
                 </Button>
               )}
             </div>
-            <div className="flex flex-wrap gap-2 text-sm text-gray-600">
+            <div className="flex flex-wrap gap-2 text-sm text-muted-foreground">
               <span>Try searching:</span>
               <button 
                 onClick={() => { setSearchQuery("Rajesh Kumar"); }}
@@ -228,33 +228,33 @@ export function BeneficiaryDashboard() {
         <Card className="border-dashed">
           <CardContent className="pt-12 pb-12">
             <div className="flex flex-col items-center justify-center text-center max-w-md mx-auto">
-              <div className="p-4 bg-blue-50 rounded-full mb-4">
+              <div className="p-4 bg-blue-500/10 rounded-full mb-4">
                 <UserSearch className="w-12 h-12 text-blue-600" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Search for a Beneficiary</h3>
-              <p className="text-gray-600 mb-6">
+              <h3 className="text-xl font-semibold text-foreground mb-2">Search for a Beneficiary</h3>
+              <p className="text-muted-foreground mb-6">
                 Enter a beneficiary's name, ID, ration card number, or Aadhaar number in the search bar above to view their complete profile, ration allocation, and transaction history.
               </p>
               <div className="grid grid-cols-2 gap-4 w-full text-left">
-                <div className="p-4 bg-gray-50 rounded-lg">
+                <div className="p-4 bg-muted/50 rounded-lg">
                   <Package className="w-5 h-5 text-blue-600 mb-2" />
-                  <p className="text-sm font-medium text-gray-900">Ration Status</p>
-                  <p className="text-xs text-gray-600 mt-1">View current allocation and consumption</p>
+                  <p className="text-sm font-medium text-foreground">Ration Status</p>
+                  <p className="text-xs text-muted-foreground mt-1">View current allocation and consumption</p>
                 </div>
-                <div className="p-4 bg-gray-50 rounded-lg">
+                <div className="p-4 bg-muted/50 rounded-lg">
                   <Calendar className="w-5 h-5 text-green-600 mb-2" />
-                  <p className="text-sm font-medium text-gray-900">Transaction History</p>
-                  <p className="text-xs text-gray-600 mt-1">Track all past distributions</p>
+                  <p className="text-sm font-medium text-foreground">Transaction History</p>
+                  <p className="text-xs text-muted-foreground mt-1">Track all past distributions</p>
                 </div>
-                <div className="p-4 bg-gray-50 rounded-lg">
+                <div className="p-4 bg-muted/50 rounded-lg">
                   <User className="w-5 h-5 text-purple-600 mb-2" />
-                  <p className="text-sm font-medium text-gray-900">Family Details</p>
-                  <p className="text-xs text-gray-600 mt-1">View household information</p>
+                  <p className="text-sm font-medium text-foreground">Family Details</p>
+                  <p className="text-xs text-muted-foreground mt-1">View household information</p>
                 </div>
-                <div className="p-4 bg-gray-50 rounded-lg">
+                <div className="p-4 bg-muted/50 rounded-lg">
                   <Clock className="w-5 h-5 text-orange-600 mb-2" />
-                  <p className="text-sm font-medium text-gray-900">Schedule Info</p>
-                  <p className="text-xs text-gray-600 mt-1">Next distribution dates</p>
+                  <p className="text-sm font-medium text-foreground">Schedule Info</p>
+                  <p className="text-xs text-muted-foreground mt-1">Next distribution dates</p>
                 </div>
               </div>
             </div>
@@ -282,7 +282,7 @@ export function BeneficiaryDashboard() {
                     <span>Category: {selectedBeneficiary.category}</span>
                   </div>
                 </div>
-                <Badge className="bg-green-500 hover:bg-green-500 text-white">
+                <Badge className="bg-green-500/100 hover:bg-green-500/100 text-white">
                   <CheckCircle className="w-3 h-3 mr-1" />
                   {selectedBeneficiary.status}
                 </Badge>
@@ -294,7 +294,7 @@ export function BeneficiaryDashboard() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <Card>
               <CardHeader className="pb-3">
-                <CardTitle className="text-sm font-medium text-gray-600">Last Dispensed</CardTitle>
+                <CardTitle className="text-sm font-medium text-muted-foreground">Last Dispensed</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="flex items-center gap-2">
@@ -306,7 +306,7 @@ export function BeneficiaryDashboard() {
 
             <Card>
               <CardHeader className="pb-3">
-                <CardTitle className="text-sm font-medium text-gray-600">Next Scheduled</CardTitle>
+                <CardTitle className="text-sm font-medium text-muted-foreground">Next Scheduled</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="flex items-center gap-2">
@@ -318,7 +318,7 @@ export function BeneficiaryDashboard() {
 
             <Card>
               <CardHeader className="pb-3">
-                <CardTitle className="text-sm font-medium text-gray-600">Beneficiary ID</CardTitle>
+                <CardTitle className="text-sm font-medium text-muted-foreground">Beneficiary ID</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="flex items-center gap-2">
@@ -344,7 +344,7 @@ export function BeneficiaryDashboard() {
                     <div className="flex items-center justify-between">
                       <div>
                         <p className="font-medium">{item.name}</p>
-                        <p className="text-sm text-gray-600">
+                        <p className="text-sm text-muted-foreground">
                           {item.consumed} of {item.allocated} {item.unit} consumed
                         </p>
                       </div>
@@ -382,7 +382,7 @@ export function BeneficiaryDashboard() {
                     </div>
                     <div className="flex-1">
                       <p className="font-medium">{transaction.items}</p>
-                      <div className="flex items-center gap-1 text-sm text-gray-600 mt-1">
+                      <div className="flex items-center gap-1 text-sm text-muted-foreground mt-1">
                         <MapPin className="w-3 h-3" />
                         <span>{transaction.location}</span>
                       </div>
@@ -397,7 +397,7 @@ export function BeneficiaryDashboard() {
           </Card>
 
           {/* Action Button */}
-          <Card className="bg-blue-50 border-blue-200">
+          <Card className="bg-blue-500/10 border-blue-200">
             <CardContent className="pt-6">
               <div className="flex items-center justify-between">
                 <div>

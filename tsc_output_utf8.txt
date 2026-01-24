@@ -1,0 +1,2 @@
+﻿src/app/components/AdminDashboard.tsx(58,9): error TS6133: 'getStatusColor' is declared but its value is never read.
+src/app/components/PillNav.tsx(42,5): error TS6133: 'theme' is declared but its value is never read.
