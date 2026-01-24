@@ -7,7 +7,7 @@ import { RationTracking } from "@/app/components/RationTracking";
 import { BiometricAuth } from "@/app/components/BiometricAuth";
 import { TransactionsReports } from "@/app/components/TransactionsReports";
 import { Shield } from "lucide-react";
-import PillNav from "@/app/components/PillNav";
+import { Navbar, NavBody, NavItems, MobileNav, MobileNavHeader, MobileNavMenu, MobileNavToggle, NavbarLogo, NavbarButton } from "@/app/components/Navbar";
 import TextType from "@/app/components/TextType";
 import { LightRays } from "@/components/ui/light-rays";
 
@@ -25,17 +25,22 @@ export default function App() {
     { label: 'Reports', href: '#reports' }
   ];
 
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   const handleNavClick = (item) => {
     const tab = item.href.replace('#', '');
     setActiveTab(tab);
+    setMobileMenuOpen(false);
   };
+
 
   return (
     <BrowserRouter>
       <div className="min-h-screen text-foreground selection:bg-indigo-500/30 dark relative">
         <div className="fixed inset-0 bg-[#0a0a0a] -z-20"></div>
         <LightRays className="fixed inset-0 -z-10" color="rgba(160, 210, 255, 0.8)" />
-        {/* PillNav Header */}
+
+        {/* Restored Header */}
         <header className="bg-slate-900/80 backdrop-blur-md border-b border-slate-800 sticky top-0 z-50">
           <div className="container mx-auto px-4 py-4">
             <div className="flex items-center justify-between">
@@ -76,29 +81,30 @@ export default function App() {
           </div>
         </header>
 
-        {/* PillNav Navigation */}
-        <div className="relative border-b border-slate-800 bg-slate-900">
-          <div className="container mx-auto px-4 py-3">
-            <div className="relative">
-              <PillNav
-                logo={logoSvg}
-                logoAlt="Smart Ration Logo"
-                items={navItems}
-                activeHref={`#${activeTab}`}
-                className="!relative !top-0 !w-full md:!w-auto"
-                ease="power2.easeOut"
-                baseColor="#1e1b4b"
-                pillColor="#6366f1"
-                hoveredPillTextColor="#ffffff"
-                pillTextColor="#ffffff"
-                theme="dark"
-                initialLoadAnimation={false}
-                onMobileMenuClick={() => { }}
-                onItemClick={handleNavClick}
-              />
-            </div>
-          </div>
-        </div>
+        {/* New Navbar Implementation - Below Header */}
+        <Navbar className="top-24">
+          <NavBody className="max-w-4xl px-4 py-2">
+            <NavItems items={navItems} activeTab={activeTab} onItemClick={handleNavClick} className="w-full justify-center" />
+          </NavBody>
+          <MobileNav>
+            <MobileNavHeader>
+              <NavbarLogo />
+              <MobileNavToggle isOpen={mobileMenuOpen} onClick={() => setMobileMenuOpen(!mobileMenuOpen)} />
+            </MobileNavHeader>
+            <MobileNavMenu isOpen={mobileMenuOpen}>
+              {navItems.map((item, idx) => (
+                <a
+                  key={idx}
+                  href={item.href}
+                  onClick={(e) => { e.preventDefault(); handleNavClick(item); }}
+                  className={`text-lg font-medium ${activeTab === item.href.replace('#', '') ? 'text-indigo-400' : 'text-slate-400'}`}
+                >
+                  {item.label}
+                </a>
+              ))}
+            </MobileNavMenu>
+          </MobileNav>
+        </Navbar>
 
         {/* Main Content */}
         <main className="container mx-auto px-4 py-8">
