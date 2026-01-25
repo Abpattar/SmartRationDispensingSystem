@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/app/components/ui/card";
 import { Badge } from "@/app/components/ui/badge";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/app/components/ui/table";
+import AnimatedList from "./AnimatedList";
 import { FileText, Download, Filter, Calendar, TrendingUp } from "lucide-react";
 import { Button } from "@/app/components/ui/button";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from "recharts";
@@ -198,55 +198,54 @@ export function TransactionsReports() {
         </div>
       </CardHeader>
       <CardContent>
-        <div className="rounded-lg border">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Transaction ID</TableHead>
-                <TableHead>Date & Time</TableHead>
-                <TableHead>Beneficiary</TableHead>
-                <TableHead>Items Dispensed</TableHead>
-                <TableHead>Center</TableHead>
-                <TableHead>Verification</TableHead>
-                <TableHead>Status</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {recentTransactions.map((tx) => (<TableRow key={tx.txId}>
-                <TableCell className="font-medium">{tx.txId}</TableCell>
-                <TableCell>
-                  <div className="text-sm">
-                    <div>{tx.date}</div>
-                    <div className="text-slate-400">{tx.time}</div>
-                  </div>
-                </TableCell>
-                <TableCell>
-                  <div className="text-sm">
-                    <div className="font-medium">{tx.beneficiary}</div>
-                    <div className="text-slate-400">{tx.beneficiaryId}</div>
-                  </div>
-                </TableCell>
-                <TableCell>
-                  <div className="text-sm">
-                    {tx.items.map((item, idx) => (<div key={idx} className="text-slate-300">
+        <div className="rounded-lg border h-[400px] bg-[#0a0a0a]">
+          {/* Header Row */}
+          <div className="grid grid-cols-7 gap-4 p-4 border-b border-gray-800 bg-[#0a0a0a] sticky top-0 z-10 font-medium text-sm text-gray-400">
+            <div>Transaction ID</div>
+            <div>Date & Time</div>
+            <div>Beneficiary</div>
+            <div>Items Dispensed</div>
+            <div>Center</div>
+            <div>Verification</div>
+            <div>Status</div>
+          </div>
+
+          <AnimatedList
+            items={recentTransactions}
+            className="w-full h-[calc(400px-54px)]"
+            displayScrollbar={true}
+            renderItem={(tx, index, isSelected) => (
+              <div className={`grid grid-cols-7 gap-4 items-center p-3 rounded-lg transition-colors ${isSelected ? 'bg-white/5' : 'hover:bg-white/5'}`}>
+                <div className="font-medium text-sm text-white truncate">{tx.txId}</div>
+                <div className="text-sm">
+                  <div className="text-white">{tx.date}</div>
+                  <div className="text-slate-400 text-xs">{tx.time}</div>
+                </div>
+                <div className="text-sm">
+                  <div className="font-medium text-white">{tx.beneficiary}</div>
+                  <div className="text-slate-400 text-xs">{tx.beneficiaryId}</div>
+                </div>
+                <div className="text-sm">
+                  {tx.items.map((item, idx) => (
+                    <div key={idx} className="text-slate-300 text-xs">
                       {item.name} ({item.quantity}{item.unit})
-                    </div>))}
-                  </div>
-                </TableCell>
-                <TableCell className="text-sm">{tx.center}</TableCell>
-                <TableCell>
-                  <Badge variant="outline" className="text-xs">
+                    </div>
+                  ))}
+                </div>
+                <div className="text-sm text-slate-300 truncate">{tx.center}</div>
+                <div>
+                  <Badge variant="outline" className="text-xs border-slate-700 text-slate-300 bg-transparent">
                     {tx.verificationMethod}
                   </Badge>
-                </TableCell>
-                <TableCell>
+                </div>
+                <div>
                   <Badge className={getStatusBadge(tx.status)}>
                     {tx.status}
                   </Badge>
-                </TableCell>
-              </TableRow>))}
-            </TableBody>
-          </Table>
+                </div>
+              </div>
+            )}
+          />
         </div>
       </CardContent>
     </Card>

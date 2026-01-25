@@ -3,6 +3,7 @@ import { Badge } from "@/app/components/ui/badge";
 import { BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, Legend } from "recharts";
 import { Users, Package, TrendingUp, AlertCircle, Activity, CheckCircle2, User, Fingerprint } from "lucide-react";
 import { Button } from "@/app/components/ui/button";
+import AnimatedList from "./AnimatedList";
 import { useState } from "react";
 export function AdminDashboard() {
   const [authenticatedBeneficiary, setAuthenticatedBeneficiary] = useState(null);
@@ -82,24 +83,36 @@ export function AdminDashboard() {
           </div>
         </CardHeader>
         <CardContent className="pt-6">
-          <div className="space-y-4 max-h-[500px] overflow-y-auto overflow-x-hidden pr-2">
-            {recentActivity.map((activity, index) => (<div key={index} className={`flex items-start gap-3 pb-4 border-b last:border-b-0 ${activity.status === 'success' && activity.action === 'Biometric verified'
-              ? 'cursor-pointer hover:bg-blue-500/10 p-3 rounded-lg -m-3 mb-1'
-              : ''}`} onClick={() => handleActivityClick(activity)}>
-              <div className={`flex-shrink-0 w-2 h-2 rounded-full mt-2 ${activity.status === 'success' ? 'bg-green-500/100' :
-                activity.status === 'warning' ? 'bg-orange-500' :
-                  'bg-blue-500/100'}`}></div>
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center justify-between gap-2">
-                  <p className="font-medium text-sm">{activity.action}</p>
-                  <span className="text-xs text-gray-500 flex-shrink-0">{activity.time}</span>
+          <AnimatedList
+            items={recentActivity}
+            className="w-full h-[500px]"
+            displayScrollbar={true}
+            onItemSelect={(activity) => handleActivityClick(activity)}
+            renderItem={(activity, index, isSelected) => (
+              <div
+                className={`flex items-start gap-3 pb-4 border-b last:border-b-0 border-white/10 ${activity.status === 'success' && activity.action === 'Biometric verified'
+                  ? 'cursor-pointer hover:bg-blue-500/10 p-3 rounded-lg -m-3 mb-1 ' + (isSelected ? 'bg-blue-500/20' : '')
+                  : 'p-3 hover:bg-white/5 rounded-lg -m-3 mb-1'
+                  }`}
+              >
+                <div className={`flex-shrink-0 w-2 h-2 rounded-full mt-2 ${activity.status === 'success' ? 'bg-green-500' :
+                  activity.status === 'warning' ? 'bg-orange-500' :
+                    'bg-blue-500'
+                  }`}></div>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center justify-between gap-2">
+                    <p className="font-medium text-sm text-white">{activity.action}</p>
+                    <span className="text-xs text-slate-400 flex-shrink-0">{activity.time}</span>
+                  </div>
+                  <p className="text-sm text-slate-400">{activity.user}</p>
+                  <p className="text-xs text-slate-500 mt-1">{activity.detail}</p>
                 </div>
-                <p className="text-sm text-muted-foreground">{activity.user}</p>
-                <p className="text-xs text-gray-500 mt-1">{activity.detail}</p>
+                {activity.status === 'success' && activity.action === 'Biometric verified' && (
+                  <Fingerprint className="w-4 h-4 text-blue-500" />
+                )}
               </div>
-              {activity.status === 'success' && activity.action === 'Biometric verified' && (<Fingerprint className="w-4 h-4 text-blue-600" />)}
-            </div>))}
-          </div>
+            )}
+          />
         </CardContent>
       </Card>
 
