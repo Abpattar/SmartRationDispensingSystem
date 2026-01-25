@@ -4,6 +4,7 @@ import AnimatedList from "./AnimatedList";
 import { FileText, Download, Filter, Calendar, TrendingUp } from "lucide-react";
 import { Button } from "@/app/components/ui/button";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from "recharts";
+import AnimatedContent from "./AnimatedContent";
 export function TransactionsReports() {
   const recentTransactions = [
     {
@@ -113,188 +114,204 @@ export function TransactionsReports() {
   return (<div className="space-y-6">
     {/* Stats Overview */}
     <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-      <Card>
-        <CardContent className="pt-6">
-          <div className="space-y-1">
-            <p className="text-sm text-muted-foreground">Today's Transactions</p>
-            <p className="text-2xl font-semibold">1,234</p>
-            <p className="text-xs text-green-600">+8.3% from yesterday</p>
-          </div>
-        </CardContent>
-      </Card>
+      <AnimatedContent distance={30} delay={0.05}>
+        <Card>
+          <CardContent className="pt-6">
+            <div className="space-y-1">
+              <p className="text-sm text-muted-foreground">Today's Transactions</p>
+              <p className="text-2xl font-semibold">1,234</p>
+              <p className="text-xs text-green-600">+8.3% from yesterday</p>
+            </div>
+          </CardContent>
+        </Card>
+      </AnimatedContent>
 
-      <Card>
-        <CardContent className="pt-6">
-          <div className="space-y-1">
-            <p className="text-sm text-muted-foreground">Success Rate</p>
-            <p className="text-2xl font-semibold">98.7%</p>
-            <p className="text-xs text-green-600">+0.2% from avg</p>
-          </div>
-        </CardContent>
-      </Card>
+      <AnimatedContent distance={30} delay={0.1}>
+        <Card>
+          <CardContent className="pt-6">
+            <div className="space-y-1">
+              <p className="text-sm text-muted-foreground">Success Rate</p>
+              <p className="text-2xl font-semibold">98.7%</p>
+              <p className="text-xs text-green-600">+0.2% from avg</p>
+            </div>
+          </CardContent>
+        </Card>
+      </AnimatedContent>
 
-      <Card>
-        <CardContent className="pt-6">
-          <div className="space-y-1">
-            <p className="text-sm text-muted-foreground">Total Dispensed</p>
-            <p className="text-2xl font-semibold">8.2T</p>
-            <p className="text-xs text-muted-foreground">Today</p>
-          </div>
-        </CardContent>
-      </Card>
+      <AnimatedContent distance={30} delay={0.15}>
+        <Card>
+          <CardContent className="pt-6">
+            <div className="space-y-1">
+              <p className="text-sm text-muted-foreground">Total Dispensed</p>
+              <p className="text-2xl font-semibold">8.2T</p>
+              <p className="text-xs text-muted-foreground">Today</p>
+            </div>
+          </CardContent>
+        </Card>
+      </AnimatedContent>
 
-      <Card>
-        <CardContent className="pt-6">
-          <div className="space-y-1">
-            <p className="text-sm text-muted-foreground">Avg Transaction Time</p>
-            <p className="text-2xl font-semibold">2.3min</p>
-            <p className="text-xs text-green-600">-0.4min faster</p>
-          </div>
-        </CardContent>
-      </Card>
+      <AnimatedContent distance={30} delay={0.2}>
+        <Card>
+          <CardContent className="pt-6">
+            <div className="space-y-1">
+              <p className="text-sm text-muted-foreground">Avg Transaction Time</p>
+              <p className="text-2xl font-semibold">2.3min</p>
+              <p className="text-xs text-green-600">-0.4min faster</p>
+            </div>
+          </CardContent>
+        </Card>
+      </AnimatedContent>
     </div>
 
     {/* Transaction Trend */}
-    <Card>
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          <TrendingUp className="w-5 h-5" />
-          Transaction Trends (6 Months)
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
-        <ResponsiveContainer width="100%" height={300}>
-          <LineChart data={monthlyStats}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-            <XAxis dataKey="month" stroke="#6b7280" />
-            <YAxis stroke="#6b7280" />
-            <Tooltip />
-            <Legend />
-            <Line type="monotone" dataKey="transactions" stroke="#3b82f6" strokeWidth={2} name="Transactions" />
-            <Line type="monotone" dataKey="beneficiaries" stroke="#10b981" strokeWidth={2} name="Unique Beneficiaries" />
-          </LineChart>
-        </ResponsiveContainer>
-      </CardContent>
-    </Card>
+    <AnimatedContent distance={50} delay={0.05}>
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <TrendingUp className="w-5 h-5" />
+            Transaction Trends (6 Months)
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <ResponsiveContainer width="100%" height={300}>
+            <LineChart data={monthlyStats}>
+              <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+              <XAxis dataKey="month" stroke="#6b7280" />
+              <YAxis stroke="#6b7280" />
+              <Tooltip />
+              <Legend />
+              <Line type="monotone" dataKey="transactions" stroke="#3b82f6" strokeWidth={2} name="Transactions" />
+              <Line type="monotone" dataKey="beneficiaries" stroke="#10b981" strokeWidth={2} name="Unique Beneficiaries" />
+            </LineChart>
+          </ResponsiveContainer>
+        </CardContent>
+      </Card>
+    </AnimatedContent>
 
     {/* Recent Transactions Table */}
-    <Card>
-      <CardHeader>
-        <div className="flex items-center justify-between">
-          <CardTitle className="flex items-center gap-2">
-            <FileText className="w-5 h-5" />
-            Recent Transactions
-          </CardTitle>
-          <div className="flex gap-2">
-            <Button variant="outline" size="sm">
-              <Filter className="w-4 h-4 mr-2" />
-              Filter
-            </Button>
-            <Button variant="outline" size="sm">
-              <Download className="w-4 h-4 mr-2" />
-              Export
-            </Button>
+    <AnimatedContent distance={50} delay={0.1}>
+      <Card>
+        <CardHeader>
+          <div className="flex items-center justify-between">
+            <CardTitle className="flex items-center gap-2">
+              <FileText className="w-5 h-5" />
+              Recent Transactions
+            </CardTitle>
+            <div className="flex gap-2">
+              <Button variant="outline" size="sm">
+                <Filter className="w-4 h-4 mr-2" />
+                Filter
+              </Button>
+              <Button variant="outline" size="sm">
+                <Download className="w-4 h-4 mr-2" />
+                Export
+              </Button>
+            </div>
           </div>
-        </div>
-      </CardHeader>
-      <CardContent>
-        <div className="rounded-lg border h-[400px] bg-[#0a0a0a]">
-          {/* Header Row */}
-          <div className="grid grid-cols-7 gap-4 p-4 border-b border-gray-800 bg-[#0a0a0a] sticky top-0 z-10 font-medium text-sm text-gray-400">
-            <div>Transaction ID</div>
-            <div>Date & Time</div>
-            <div>Beneficiary</div>
-            <div>Items Dispensed</div>
-            <div>Center</div>
-            <div>Verification</div>
-            <div>Status</div>
-          </div>
+        </CardHeader>
+        <CardContent>
+          <div className="rounded-lg border h-[400px] bg-[#0a0a0a]">
+            {/* Header Row */}
+            <div className="grid grid-cols-7 gap-4 p-4 border-b border-gray-800 bg-[#0a0a0a] sticky top-0 z-10 font-medium text-sm text-gray-400">
+              <div>Transaction ID</div>
+              <div>Date & Time</div>
+              <div>Beneficiary</div>
+              <div>Items Dispensed</div>
+              <div>Center</div>
+              <div>Verification</div>
+              <div>Status</div>
+            </div>
 
-          <AnimatedList
-            items={recentTransactions}
-            className="w-full h-[calc(400px-54px)]"
-            displayScrollbar={true}
-            renderItem={(tx, index, isSelected) => (
-              <div className={`grid grid-cols-7 gap-4 items-center p-3 rounded-lg transition-colors ${isSelected ? 'bg-white/5' : 'hover:bg-white/5'}`}>
-                <div className="font-medium text-sm text-white truncate">{tx.txId}</div>
-                <div className="text-sm">
-                  <div className="text-white">{tx.date}</div>
-                  <div className="text-slate-400 text-xs">{tx.time}</div>
+            <AnimatedList
+              items={recentTransactions}
+              className="w-full h-[calc(400px-54px)]"
+              displayScrollbar={true}
+              renderItem={(tx, index, isSelected) => (
+                <div className={`grid grid-cols-7 gap-4 items-center p-3 rounded-lg transition-colors ${isSelected ? 'bg-white/5' : 'hover:bg-white/5'}`}>
+                  <div className="font-medium text-sm text-white truncate">{tx.txId}</div>
+                  <div className="text-sm">
+                    <div className="text-white">{tx.date}</div>
+                    <div className="text-slate-400 text-xs">{tx.time}</div>
+                  </div>
+                  <div className="text-sm">
+                    <div className="font-medium text-white">{tx.beneficiary}</div>
+                    <div className="text-slate-400 text-xs">{tx.beneficiaryId}</div>
+                  </div>
+                  <div className="text-sm">
+                    {tx.items.map((item, idx) => (
+                      <div key={idx} className="text-slate-300 text-xs">
+                        {item.name} ({item.quantity}{item.unit})
+                      </div>
+                    ))}
+                  </div>
+                  <div className="text-sm text-slate-300 truncate">{tx.center}</div>
+                  <div>
+                    <Badge variant="outline" className="text-xs border-slate-700 text-slate-300 bg-transparent">
+                      {tx.verificationMethod}
+                    </Badge>
+                  </div>
+                  <div>
+                    <Badge className={getStatusBadge(tx.status)}>
+                      {tx.status}
+                    </Badge>
+                  </div>
                 </div>
-                <div className="text-sm">
-                  <div className="font-medium text-white">{tx.beneficiary}</div>
-                  <div className="text-slate-400 text-xs">{tx.beneficiaryId}</div>
-                </div>
-                <div className="text-sm">
-                  {tx.items.map((item, idx) => (
-                    <div key={idx} className="text-slate-300 text-xs">
-                      {item.name} ({item.quantity}{item.unit})
-                    </div>
-                  ))}
-                </div>
-                <div className="text-sm text-slate-300 truncate">{tx.center}</div>
-                <div>
-                  <Badge variant="outline" className="text-xs border-slate-700 text-slate-300 bg-transparent">
-                    {tx.verificationMethod}
-                  </Badge>
-                </div>
-                <div>
-                  <Badge className={getStatusBadge(tx.status)}>
-                    {tx.status}
-                  </Badge>
-                </div>
-              </div>
-            )}
-          />
-        </div>
-      </CardContent>
-    </Card>
+              )}
+            />
+          </div>
+        </CardContent>
+      </Card>
+    </AnimatedContent>
 
     {/* Report Generation */}
-    <Card>
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          <Download className="w-5 h-5" />
-          Generate Reports
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {reportCategories.map((report, index) => {
-            const Icon = report.icon;
-            return (<div key={index} className="flex items-start gap-4 p-4 border rounded-lg hover:bg-muted/50 transition-colors">
-              <div className="p-2 bg-blue-500/10 rounded-lg">
-                <Icon className="w-6 h-6 text-blue-600" />
-              </div>
-              <div className="flex-1">
-                <h4 className="font-medium">{report.name}</h4>
-                <p className="text-sm text-muted-foreground mt-1">{report.description}</p>
-                <Button variant="outline" size="sm" className="mt-3">
-                  <Download className="w-3 h-3 mr-2" />
-                  Generate PDF
-                </Button>
-              </div>
-            </div>);
-          })}
-        </div>
-      </CardContent>
-    </Card>
+    <AnimatedContent distance={50} delay={0.15}>
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Download className="w-5 h-5" />
+            Generate Reports
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {reportCategories.map((report, index) => {
+              const Icon = report.icon;
+              return (<div key={index} className="flex items-start gap-4 p-4 border rounded-lg hover:bg-muted/50 transition-colors">
+                <div className="p-2 bg-blue-500/10 rounded-lg">
+                  <Icon className="w-6 h-6 text-blue-600" />
+                </div>
+                <div className="flex-1">
+                  <h4 className="font-medium">{report.name}</h4>
+                  <p className="text-sm text-muted-foreground mt-1">{report.description}</p>
+                  <Button variant="outline" size="sm" className="mt-3">
+                    <Download className="w-3 h-3 mr-2" />
+                    Generate PDF
+                  </Button>
+                </div>
+              </div>);
+            })}
+          </div>
+        </CardContent>
+      </Card>
+    </AnimatedContent>
 
     {/* Transparency Info */}
-    <Card className="bg-indigo-50 border-indigo-200">
-      <CardContent className="pt-6">
-        <div className="flex items-start gap-3">
-          <FileText className="w-5 h-5 text-indigo-600 flex-shrink-0 mt-0.5" />
-          <div>
-            <h3 className="font-semibold text-indigo-900">Complete Transparency & Audit Trail</h3>
-            <p className="text-sm text-indigo-700 mt-1">
-              Every transaction is recorded with complete details including biometric verification, timestamp,
-              and dispensing information. All data is immutable and available for audit purposes, ensuring
-              complete transparency in the distribution system.
-            </p>
+    <AnimatedContent distance={30} delay={0.2}>
+      <Card className="bg-indigo-50 border-indigo-200">
+        <CardContent className="pt-6">
+          <div className="flex items-start gap-3">
+            <FileText className="w-5 h-5 text-indigo-600 flex-shrink-0 mt-0.5" />
+            <div>
+              <h3 className="font-semibold text-indigo-900">Complete Transparency & Audit Trail</h3>
+              <p className="text-sm text-indigo-700 mt-1">
+                Every transaction is recorded with complete details including biometric verification, timestamp,
+                and dispensing information. All data is immutable and available for audit purposes, ensuring
+                complete transparency in the distribution system.
+              </p>
+            </div>
           </div>
-        </div>
-      </CardContent>
-    </Card>
+        </CardContent>
+      </Card>
+    </AnimatedContent>
   </div>);
 }
