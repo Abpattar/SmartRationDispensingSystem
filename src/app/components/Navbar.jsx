@@ -94,7 +94,7 @@ export const NavItems = ({
         <motion.div
             onMouseLeave={() => setHovered(null)}
             className={cn(
-                "hidden flex-1 flex-row items-center justify-center space-x-2 text-sm font-medium transition duration-200 lg:flex lg:space-x-2",
+                "hidden flex-1 flex-row items-center justify-center space-x-2 text-base font-medium transition duration-200 lg:flex lg:space-x-2",
                 className
             )}>
             {items.map((item, idx) => (
@@ -102,7 +102,7 @@ export const NavItems = ({
                     onMouseEnter={() => setHovered(idx)}
                     onClick={(e) => handleClick(e, item)}
                     className={cn(
-                        "relative px-4 py-2 text-slate-400 hover:text-white transition-colors cursor-pointer",
+                        "relative px-4 py-2 text-slate-200 hover:text-white transition-colors cursor-pointer",
                         activeTab === item.href.replace('#', '') && "text-white"
                     )}
                     key={`link-${idx}`}
